@@ -8,7 +8,7 @@ export const getRepos = (searchQuery = "stars:%3E1", currentPage, allPade) => {
   return async (dispatch) =>{
         try {
             dispatch(setFetch(true));
-            const response = await fetch(`https://api.github.com/search11/repositories?q=${searchQuery}&sort=stars&per_page=${allPade}&page=${currentPage}`);
+            const response = await fetch(`https://api.github.com/search/repositories?q=${searchQuery}&sort=stars&per_page=${allPade}&page=${currentPage}`);
             const result = await response.json();
             dispatch(setRepos(result));
             dispatch(setFetch(false));
