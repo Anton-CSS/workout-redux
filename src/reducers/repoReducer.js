@@ -1,13 +1,15 @@
 const SET_REPOS = 'SET_REPOS';
 const SET_FETCH = 'SET_FETCH';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_ERROR = 'SET_ERROR';
 
 const defaultState ={
     items:[],
     isLoading: true,
     currentPage: 1,
     allPage: 10,
-    totalCount: 0
+    totalCount: 0,
+    isError: false
 }
 
 export default function repoReducer(state = defaultState, action) {
@@ -21,6 +23,9 @@ export default function repoReducer(state = defaultState, action) {
         case SET_CURRENT_PAGE:{
             return {...state, currentPage: action.payload}
         }
+        case SET_ERROR:{
+            return {...state, isError: action.payload}
+        }
         default:{
             return state;
         }
@@ -30,3 +35,4 @@ export default function repoReducer(state = defaultState, action) {
 export const setRepos = (repos) => ({type: SET_REPOS, payload: repos});
 export const setFetch = (bool) => ({type: SET_FETCH, payload: bool});
 export const setCurrentPage = (page) => ({type: SET_CURRENT_PAGE, payload: page});
+export const setError = (bool) => ({type: SET_ERROR, payload: bool});

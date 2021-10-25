@@ -6,10 +6,12 @@ import Repo from "./repo/Repo";
 import {setCurrentPage} from "../../reducers/repoReducer";
 import {createPages} from "../../createPages";
 
+
 const Main = () => {
     const dispatch = useDispatch();
     const repos = useSelector(state => state.repos.items);
     const isLoading = useSelector(state => state.repos.isLoading);
+    const isError = useSelector(state => state.repos.isError);
     const page = useSelector(state => state.repos.currentPage);
     const allPage = useSelector(state => state.repos.allPage);
     const totalCount = useSelector(state => state.repos.totalCount);
@@ -17,9 +19,11 @@ const Main = () => {
     const pagesCount = Math.ceil(totalCount / allPage)
     let pages = [];
     createPages(pages, pagesCount, page);
+
     useEffect(()=>{
         dispatch(getRepos(searchValue, page, allPage));
-},[page ]);
+},[page]);
+
     const searchHandler = () => {
         dispatch(setCurrentPage(1));
         dispatch(getRepos(searchValue, page, allPage));
@@ -27,6 +31,11 @@ const Main = () => {
 
     return (
         <div>
+            {
+                isError && <div className="alert alert-danger" role="alert">
+                    Произошла ошибка!
+                </div>
+            }
             <div className={'search'}>
                 <input
                     value={searchValue}
