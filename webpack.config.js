@@ -20,7 +20,13 @@ module.exports = {
     },
     devServer: {
         port: 5000,
+        historyApiFallback: true,
         hot: true,
+    },
+    performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
     },
     devtool: isProd ? false : "source-map",
     plugins: [new HtmlWebpackPlugin({
